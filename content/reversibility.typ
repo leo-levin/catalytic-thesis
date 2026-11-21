@@ -135,9 +135,14 @@ By @local, $k$ and $d$ take $O(1)$ bits, so $mM^gamma_->$ and $mM^gamma_<-$ use 
   For every position $p$, $Pi inv (Pi(p)) = p$ and $Pi(Pi inv (p)) = p$.
 ] <undo>
 #proof[
-  \
-  #h(3em) _To do_
-]
+  We first show $Pi inv (Pi(p)) = p$:
+  - If $sigma$ has a first child $rho$, then $Pi(sigma, down) = (rho, down)$. Since $rho$ is not halting and is the first child of $Gamma(rho) = sigma$, we get $Pi inv (rho, down) = (sigma, down)$.
+  - If $sigma$ has no children, then $Pi(sigma, down) = (sigma, up)$, and $Pi inv (sigma, up) = (sigma, down)$.
+  - If $sigma$ is halting, then $Pi(sigma, up) = (sigma, down)$, and $Pi inv (sigma, down) = (sigma, up)$.
+  - If $sigma$ has a next sibling $rho$, then $Pi(sigma, up) = (rho, down)$. Since $rho$ is not halting and its previous sibling is $sigma$, we get $Pi inv (rho, down) = (sigma, up)$.
+  - Otherwise, $sigma$ is the last child of $Gamma(sigma)$, so $Pi(sigma, up) = (Gamma(sigma), up)$ and $Pi inv (Gamma(sigma), up) = (sigma, up)$.
+
+  So $Pi$ is injective. There are finitely many positions $(chl v, gamma chr, a)$ , so $Pi$ is a bijection. Given $p$, write $p = Pi(q)$. Then $Pi(Pi inv (p)) = Pi(Pi inv (Pi(q))) = Pi(q) = p$.]
 
 #lemma[
   Let $sigma in gG_tau$. Starting at $(sigma, down)$ and applying $Pi$ until first reaching $(sigma, up)$, the walk visits $(rho, down)$ and $(rho, up)$ exactly once for every $rho$ in the subtree of $sigma$, and visits no other positions.
